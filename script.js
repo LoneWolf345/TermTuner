@@ -6,6 +6,7 @@ function updatePrice() {
     if (!hsdPriceGoal) {
         hsdPriceLabel.textContent = hsdPriceSlider.value;
     }
+    calculateSummary();
 }
 
 function updateTerm() {
@@ -23,7 +24,19 @@ function updateTerm() {
     }
 }
 
+function calculateSummary() {
+    const units = parseInt(document.getElementById('totalUnits').value) || 0;
+    const capitalExpenses = parseFloat(document.getElementById('capitalExpenses').value) || 0;
+    const hsdPrice = parseFloat(document.getElementById('hsdPrice').value) || 0;
+    const mrr = units * hsdPrice;
+    const capCostPerUnit = units > 0 ? (capitalExpenses / units).toFixed(2) : 0;
+
+    document.getElementById('mrr').textContent = mrr.toFixed(2);
+    document.getElementById('capCostPerUnit').textContent = capCostPerUnit;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     updatePrice();
     updateTerm();
+    calculateSummary();
 });
