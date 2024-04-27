@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Negotiation Tool</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Negotiation Tool</h2>
+
+        <label for="hsdPrice">Bulk HSD Price (per user): $
+<span id="hsdPriceLabel">30</span></label>
+<input type="range" id="hsdPrice" min="10" max="50" value="30" step="1" onchange="updatePrice()">
+<input type="checkbox" id="hsdPriceGoal"> Goal
+    <label for="termLength">Term Length (years): <span id="termLengthLabel">5</span></label>
+    <input type="range" id="termLength" min="1" max="10" value="5" step="1" onchange="updateTerm()">
+    <input type="checkbox" id="termLengthGoal"> Goal
+
+    <label for="totalUnits">Total Number of Units:</label>
+    <input type="number" id="totalUnits">
+
+    <label for="capitalExpenses">Capital Expenses ($):</label>
+    <input type="number" id="capitalExpenses">
+
+    <label><input type="checkbox" id="eero"> eero for Communities</label>
+    <label><input type="checkbox" id="ramp"> 1yr Ramp Period</label>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
