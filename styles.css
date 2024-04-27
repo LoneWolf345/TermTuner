@@ -1,12 +1,24 @@
 body {
     font-family: Arial, sans-serif;
+    background: #f4f4f4;
 }
 
 .container {
     width: 90%;
-    max-width: 600px;
+    max-width: 800px;
     margin: auto;
     padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.grid {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputs, .sliders {
+    width: 48%;
 }
 
 input[type=range], input[type=number] {
@@ -18,4 +30,15 @@ label {
     font-weight: bold;
     display: block;
     margin-top: 20px;
+}
+
+.summary {
+    clear: both;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+
+h2, h3 {
+    color: #333;
 }
