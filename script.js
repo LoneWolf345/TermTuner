@@ -2,37 +2,57 @@ function updatePrice() {
     const hsdPriceSlider = document.getElementById('hsdPrice');
     const hsdPriceLabel = document.getElementById('hsdPriceLabel');
     const hsdPriceGoal = document.getElementById('hsdPriceGoal').checked;
-    const termLengthSlider = document.getElementById('termLength');
+    const previousPrice = parseFloat(hsdPriceLabel.textContent.replace(/,/g, ''));
 
     if (!hsdPriceGoal) {
         hsdPriceLabel.textContent = formatNumber(hsdPriceSlider.value);
-        if (!document.getElementById('termLengthGoal').checked) {
-            // Adjust term length based on price change
-            const priceChange = hsdPriceSlider.value - 30; // Initial price 30
-            const termAdjustment = Math.floor(priceChange / -2);
-            termLengthSlider.value = 5 + termAdjustment; // Initial term 5 years
-            document.getElementById('termLengthLabel').textContent = termLengthSlider.value;
+    }
+    
+    // Adjust the term length based on the price change, if not locked as a goal
+    if (!document.getElementById('termLengthGoal').checked) {
+        const priceChange = hsdPriceSlider.value - previousPrice;
+        const termAdjustment = -Math.floor(priceChange / 2);
+        if (termAdjustment !== 0) {
+            const termLengthSlider = document.getElementById('termLength');
+            termLengthSlider.value = parseInt(termLengthSlider.value) + termAdjustment;
+            updateTermLabel(termLengthSlider.value);
         }
     }
+
     calculateSummary();
 }
 
 function updateTerm() {
     const termLengthSlider = document.getElementById('termLength');
-    const termLengthLabel = document.getElementById('termLengthLabel');
     const termLengthGoal = document.getElementById('termLengthGoal').checked;
-    const hsdPriceSlider = document.getElementById('hsdPrice');
-
-    termLengthLabel.textContent = termLengthSlider.value;
-
-    if (!termLengthGoal && !document.getElementById('hsdPriceGoal').checked) {
-        // Adjust price based on term length change
-        const termChange = termLengthSlider.value - 5; // Initial term 5 years
-        const priceAdjustment = termChange * -2;
-        hsdPriceSlider.value = 30 + priceAdjustment; // Initial price 30
-        document.getElementById('hsdPriceLabel').textContent = formatNumber(hsdPriceSlider.value);
+    const previousTerm = parseInt(document.getElementById('termLengthLabel').textContent.replace(/,/g, ''));
+    
+    if (!termLengthGoal) {
+        updateTermLabel(termLengthSlider.value);
     }
+
+    // Adjust the price based on the term length change, if not locked as a goal
+    if (!document.getElementById('hsdPriceGoal').checked) {
+        const termChange = termLengthSlider.value - previousTerm;
+        const priceAdjustment = -termChange * 2;
+        if (priceAdjustment !== 0) {
+            const hsdPriceSlider = document.getElementById('hsdPrice');
+            hsdPriceSlider.value = parseInt(hsdPriceSlider.value) + priceAdjustment;
+            updatePriceLabel(hsdPriceSlider.value);
+        }
+    }
+
     calculateSummary();
+}
+
+function updatePriceLabel(value) {
+    const hsdPriceLabel = document.getElementById('hsdPriceLabel');
+    hsdPriceLabel.textContent = formatNumber(value);
+}
+
+function updateTermLabel(value) {
+    const termLengthLabel = document.getElementById('termLengthLabel');
+    termLengthLabel.textContent = formatNumber(value);
 }
 
 function calculateSummary() {
@@ -40,10 +60,10 @@ function calculateSummary() {
     const capitalExpenses = parseFloat(document.getElementById('capitalExpenses').value) || 0;
     const hsdPrice = parseFloat(document.getElementById('hsdPrice').value) || 0;
     const mrr = units * hsdPrice;
-    const capCostPerUnit = units > 0 ? (capitalExpenses / units) : 0;
+    const capCostPerUnit = units > 0 ? (capitalExpenses / units).toFixed(2) : 0;
 
     document.getElementById('mrr').textContent = formatNumber(mrr.toFixed(2));
-    document.getElementById('capCostPerUnit').textContent = formatNumber(capCostPerUnit.toFixed(2));
+    document.getElementById('capCostPerUnit').textContent = formatNumber(capCostPerUnit);
 }
 
 function formatNumber(num) {
