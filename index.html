@@ -17,6 +17,30 @@
 
                 <label for="capitalExpenses">Capital Expenses ($):</label>
                 <input type="number" id="capitalExpenses" value="15000" oninput="calculateSummary()">
+
+                <label for="opportunityType">Opportunity Type:</label>
+                <select id="opportunityType" onchange="calculateSummary()">
+                    <option value="Greenfield">Greenfield</option>
+                    <option value="Winback">Winback</option>
+                    <option value="Renewal">Renewal</option>
+                </select>
+
+                <label for="bulkPlan">Bulk Plan:</label>
+                <select id="bulkPlan" onchange="calculateSummary()">
+                    <option value="FC 100">FC 100</option>
+                    <option value="FC 300">FC 300</option>
+                    <option value="FC 600">FC 600</option>
+                    <option value="FC Gig">FC Gig</option>
+                </select>
+
+                <label for="startingBulkRate">Starting Bulk Rate ($):</label>
+                <input type="number" id="startingBulkRate" value="35" oninput="calculateSummary()">
+
+                <label for="costPerCPE">Cost Per CPE ($):</label>
+                <input type="number" id="costPerCPE" value="60" oninput="calculateSummary()">
+
+                <label for="doorFee">Door Fee ($):</label>
+                <input type="number" id="doorFee" value="0" oninput="calculateSummary()">
             </div>
 
             <div class="sliders">
@@ -37,6 +61,11 @@
 <p>Capital Cost Per Unit: $
 
 <span id="capCostPerUnit"></span></p>
+<p>Internal Rate of Return (IRR): <span id="irr"></span>%</p>
+<p>Net Present Value (NPV): $
+
+<span id="npv"></span></p>
+<p>Payback Period: <span id="paybackPeriod"></span> years</p>
 </div>
 </div>
 <script src="script.js"></script>
