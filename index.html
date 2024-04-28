@@ -13,10 +13,10 @@
         <div class="grid">
             <div class="inputs">
                 <label for="totalUnits">Total Number of Units:</label>
-                <input type="number" id="totalUnits" oninput="calculateSummary()">
+                <input type="number" id="totalUnits" value="100" oninput="calculateSummary()">
 
                 <label for="capitalExpenses">Capital Expenses ($):</label>
-                <input type="number" id="capitalExpenses" oninput="calculateSummary()">
+                <input type="number" id="capitalExpenses" value="15000" oninput="calculateSummary()">
             </div>
 
             <div class="sliders">
@@ -24,15 +24,6 @@
 <span id="hsdPriceLabel">30</span></label>
 <input type="range" id="hsdPrice" min="10" max="50" value="30" step="1" oninput="updatePrice()">
 <input type="checkbox" id="hsdPriceGoal"> Goal
-            <label for="termLength">Term Length (years): <span id="termLengthLabel">5</span></label>
-            <input type="range" id="termLength" min="1" max="10" value="5" step="1" oninput="updateTerm()">
-            <input type="checkbox" id="termLengthGoal"> Goal
-        </div>
-    </div>
-
-    <div class="summary">
-        <h3>Summary</h3>
-        <p>Monthly Recurring Revenue (MRR): $
             <label for="termLength">Term Length (years): <span id="termLengthLabel">5</span></label>
             <input type="range" id="termLength" min="1" max="10" value="5" step="1" oninput="updateTerm()">
             <input type="checkbox" id="termLengthGoal"> Goal
